@@ -1,9 +1,9 @@
 /*
 Max Kim
 Lab C 
-a program that models an arena. There are warriors who have strengths. They battle each other and lose strength. Different outputs based on who wins, who loses, and 
-if they both die. No classes allowed, the goal of this assignment is to use struct. Make two struct - one called arena and warrior. Warrior handles the players. 
-Arena handles the battles, status output. Requires atleast c++11 to run. 
+A program that models an arena with warriors who have only one characteristic caleld "strength", which determines who wins in a 1v1 battle against each other. The
+program simulates this by making the warriors fight and lose strength. Rules: No classes. Program relies on two structs - Arena and Warrior. The Warrior struct
+handles the players. Arena handles the battles, printing out status, and managing warriors. Requires atleast c++11 to run. 
 */
 
 #include <iostream>
