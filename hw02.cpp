@@ -1,9 +1,9 @@
 /*
 Max Kim
 Lab C 
-a program that models an arena. There are warriors who have strengths. They battle each other and lose strength. Different outputs based on who wins, who loses, and if they both die. 
-No classes allowed, the goal of this assignment is to use struct. Make two struct - one called arena and warrior. Warrior handles the players. Arena handles the battles, status output,
-and such. Requires atleast c++11 to run. 
+a program that models an arena. There are warriors who have strengths. They battle each other and lose strength. Different outputs based on who wins, who loses, and 
+if they both die. No classes allowed, the goal of this assignment is to use struct. Make two struct - one called arena and warrior. Warrior handles the players. 
+Arena handles the battles, status output. Requires atleast c++11 to run. 
 */
 
 #include <iostream>
@@ -11,7 +11,7 @@ and such. Requires atleast c++11 to run.
 #include <string>
 #include <vector>
 
-struct Warrior {
+struct Warrior {		
 	std::string name;
 	int strength;
 
@@ -20,8 +20,8 @@ struct Warrior {
 	}
 };
 
-struct Arena {
-	std::vector <Warrior> players;
+struct Arena {		//handles the battles, printing the status, and holds the warriors. 
+	std::vector <Warrior> players;		//hold a vector of all warriors
 
 	void printStatus() {
 		std::cout << "There are " << players.size() << " Warriors\n";
@@ -61,11 +61,46 @@ struct Arena {
 	}
 };
 
+void chooseOption(std::ifstream& stream, Arena& arena) {
+	std::string firstWord;
+	stream >> firstWord;
+	if ("Warrior" == firstWord) {		//create a warrior and add it into arena's vector 
+		std::string nameString;
+		int strengthNumber;
+		stream >> nameString >> strengthNumber;
+		Warrior player;
+		player.name = nameString;
+		player.strength = strengthNumber;
+		arena.players.push_back(player);
+	} else if ("Battle" == firstWord) {		//grab warriors and fight
+		std::string firstPlayer;
+		std::string secondPlayer;
+		stream >> firstPlayer >> secondPlayer;
+		//have to find the actual object that has the same name. use index to make it easier.
+		int firstPlayerIndex;
+		int secondPlayerIndex;
+		for (size_t i = 0; i < arena.players.size(); ++i) {
+			if (arena.players[i].name == firstPlayer) {
+				firstPlayerIndex = i;
+			} else if (arena.players[i].name == secondPlayer) {
+				secondPlayerIndex = i;
+			}
+		}
+		arena.battle(arena.players[firstPlayerIndex], arena.players[secondPlayerIndex]);
+	} else if ("Status" == firstWord) {
+		arena.printStatus();
+	}
+}
+
 int main() {
 	std::ifstream ifs("warriors.txt");
 	if (!ifs) {
 		std::cerr << "Could not open file.\n";
 		exit(1);
 	}
-	
+
+	Arena arena; 	
+	while (ifs.peek() != EOF) {		//while not at the end of file
+		chooseOption(ifs, arena);
+	}
 }
