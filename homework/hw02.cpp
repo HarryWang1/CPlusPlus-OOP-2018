@@ -1,6 +1,7 @@
 /*
 Max Kim
 Lab C 
+1 February 2018
 A program that models an arena with warriors who have only one characteristic caleld "strength", which determines who wins in a 1v1 battle against each other. The
 program simulates this by making the warriors fight and lose strength. Rules: No classes. Program relies on two structs - Arena and Warrior. The Warrior struct
 handles the players. Arena handles the battles, printing out status, and managing warriors. Requires atleast c++11 to run. 
