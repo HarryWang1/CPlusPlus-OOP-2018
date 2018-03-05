@@ -17,7 +17,7 @@ struct Hydrocarbon {
 	int HNumber;
 };
 
-struct HydrocarbonManager {
+struct HydrocarbonManager {		//outer struct that handles the adding, printing, and sorting of the vector of all the formulas
 	std::vector <Hydrocarbon> listOfFormulas;
 
 	void printList() {
