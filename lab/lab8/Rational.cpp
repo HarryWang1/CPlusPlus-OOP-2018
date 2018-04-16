@@ -110,7 +110,7 @@ namespace CS2124 {
     //postfix --operator. Not a friend. Don't return local objects by reference.
     Rational operator-- (Rational& lhs, int) {
         Rational copy = lhs;
-        operator--(lhs);
+        operator--(lhs);        //modify the original
         return copy;
     }
 
