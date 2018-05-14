@@ -34,21 +34,17 @@ void constIteratorPrint(const list<int>& items) {
 
 
 //task 10 functions
-/*
-nonConstIteratorForPrint(const list<int>& items) {
-    for (list<int>::iterator ptr : items) {
-        cout << *ptr;
-    }
-}
-*/
-//don't use iterators in ranged for loop, just numbers because items holds numbers not iterators
-/*
-constIteratorForPrint(const list<int>& items) {
-    for (list<int>::const_iterator ptr: items) {
-        cout << *ptr;
-    }
-}
-*/
+//nonConstIteratorForPrint(const list<int>& items) {
+//    for (list<int>::iterator ptr : items) {
+//        cout << *ptr;
+//    }
+//}
+//constIteratorForPrint(const list<int>& items) {
+//    for (list<int>::const_iterator ptr: items) {
+//        cout << *ptr;
+//    }
+//}
+//don't use iterators in ranged for loop, just use numbers because items holds numbers not iterators
 constIteratorForPrint(const list<int>& items) {
     for (int num: items) {
         cout << num << ' ';
@@ -94,8 +90,8 @@ bool isEven(int num) {
 }
 
 //task 19 function
-//this find will take start and end and value. Not like other finds where it tkaes the vector/array
-list<int>::const_iterator ourFind(list<int>::const_iterator start, list<int>::const_iterator stop, int findThis) {
+//this find will take start,end,value. Not like other finds where it takes the vector/array
+list<int>::const_iterator ourFind(list<int>::iterator start, list<int>::iterator stop, int findThis) {
     cout << "This is our find NON TEMPLATE VERSION" << endl;
     for (auto ptr = start; ptr != stop; ++ptr) {
         if (*ptr == findThis) {
@@ -312,7 +308,7 @@ int main() {
     [] (int a, int b) { cout << a + b << endl; } (4, 5);
     int result = [] (int a, int b) { return a + b; } (4, 5);    //notice no return type, obvious to compiler
     cout << "the result is: " << result << endl;
-    auto save_4 = find_if(List.begin(), List.end(), [] (int n) {return n % 2 ==0;});
+    auto save_4 = find_if(List.begin(), List.end(), [] (int n) { return n % 2 == 0; });
     if (save_4 != List.end()) {
         cout << *save_4 << endl;
     }
@@ -324,13 +320,13 @@ int main() {
 
     int arr[4]; 
 
-    copy(Vector.begin(), Vector.end(), arr);    //how does this work when you don't pass in a arr.begin() or 
-    //an iterator on the first place to copy in arr?
+    copy(Vector.begin(), Vector.end(), arr);    //stl method that takes start and end of where you want to copy 
+    //and then the place where you want to place copy
 
     //for (int item: arr) {
     //    cout << item << ' ';
     //}
-    //arrays can't use for ranged loop becuase no iterators and no begin or end
+    //arrays can't use for ranged loop becuase no iterators nor begin()/end(). 
 
     for (size_t i =0; i < sizeof(arr)/sizeof(arr[0]); ++i) {
         cout << arr[i] << ' ';

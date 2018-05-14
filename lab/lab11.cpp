@@ -25,9 +25,9 @@ void listInsertHead(Node*& headPtr, int entry) {
 // Should free up your nodes, of course...
 void listClear(Node*& headPtr) {
     while (headPtr) {
-        Node* next = headPtr->next;
-        delete headPtr;
-        headPtr = next;
+        Node* next = headPtr->next;         //save what comes after
+        delete headPtr;                     //delete
+        headPtr = next;                     //point to next
     }
 }
 
@@ -54,7 +54,7 @@ void insertAfter(Node* nodeToAddAfter, Node* headPtrOfOtherNode) {
         lastNode = lastNode->next;
     }
     lastNode->next = nextNode;
-
+    //step 3 is needed because we don't know how long the node that we insert is. 
 }
 
 void printList(Node* headPtr) {

@@ -10,8 +10,7 @@ using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 struct TNode {
-  TNode(int data = 0, TNode *left = nullptr, TNode *right = nullptr)
-    : data(data), left(left), right(right) {}
+  TNode(int data = 0, TNode *left = nullptr, TNode *right = nullptr) : data(data), left(left), right(right) {}
   int data;
   TNode *left, *right;
 };
@@ -25,8 +24,8 @@ struct Node {
 //Write a recursive function to determine if a non-negative integer has an even number of ones in its binary 
 //representation. Return true if it does and false otherwise.
 //return true if number is 1, and return false if number is 0. Compare this one and the next one to determine
-//evenOnes says if the rest of numbers have even number of ones. So if you also have anohter one, then you
-//become odd. If yiu dont have a one, then you stay even. 
+//evenOnes says if the rest of numbers have even number of ones. So if you also have another one, then you
+//become odd. If you dont have a one, then you stay even. 
 
 bool evenOnes(int n) {
     if (n == 0) {
@@ -35,13 +34,12 @@ bool evenOnes(int n) {
     if (n == 1) {
         return false;
     }
-    if (evenOnes(n/2) && n%2==0) {
-        return true;
-    } else if (evenOnes(n/2) && n%2==1) {
+    if (n%2==0) {
+        return evenOnes(n/2);
+    //all functions below: n%2==1. 
+    } else if (evenOnes(n/2)) {
         return false;
-    } else if (evenOnes(n/2) == false && n%2==0) {
-        return false;
-    } else if (evenOnes(n/2) == false && n%2==1) {
+    } else if (evenOnes(n/2) == false) {
         return true;
     } 
 }
@@ -64,8 +62,8 @@ Node* sumOfTwoLists(Node* first, Node* second) {
     return new Node(first->data + second->data + otherSums->data);
 }
 
-//Write a recursive function to return the maximum of the values in a binary tree.
-//compare this root value with left and right. Return what is max of their max and root's value. 
+//Write a recursive function to return the maximum value in a binary tree.
+//compare the value in the node that you are looking at with the left and right's value. Return the max of those 3
 //save initial sum of left and right as zero and update after checking if not nullptr.
 int maxOfBinaryTree(TNode* root) {
     if (root == nullptr) {
@@ -80,13 +78,13 @@ int maxOfBinaryTree(TNode* root) {
     if (root->right != nullptr) {
         right = maxOfBinaryTree(root->right);
     }
-    return max(mid, max(left, right));
+    return max(mid, max(left, right));  //return the greatest of those 3
 } 
 
 //Write a recursive function called palindrome that determines if a char array is a palindrome.
-//check if the first and last are same and also check with size-1, so look at the second and penultimate next.
+//check if the first and last are same and also check the second and penultimate are also same. 
 bool palindrome(char s[], int size) {
-    if (size < 2) {
+    if (size < 2) {         //only one or zero letters. 
         return true;
     }
     //dereference the address, but the [] operator doesnt need a dereference. Decrease size as you go and 

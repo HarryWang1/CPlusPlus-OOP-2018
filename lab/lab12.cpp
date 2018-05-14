@@ -134,9 +134,8 @@ public:
             }
             return curr->data;
         }
-        return -1;
     }
-    const int& operator[] (const int index) const {
+    const int operator[] (const int index) const {
         if (index < this->theSize) {
             Node* curr = header->next;
             for (int i=0; i < index; ++i) {
